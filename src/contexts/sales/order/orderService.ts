@@ -1,4 +1,4 @@
-import { CreateOrderRequest } from "./orderDto";
+import { CreateOrderRequest } from "./orderType";
 import orderEvents from "./orderEvent";
 import Order from "./orderModel";
 

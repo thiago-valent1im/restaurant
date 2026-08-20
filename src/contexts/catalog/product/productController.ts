@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateProductRequest } from "./productDto";
+import { CreateProductRequest } from "./productType";
 import { createProduct, getAllProducts } from "./productService";
 
 export async function create(req: Request, res: Response) {

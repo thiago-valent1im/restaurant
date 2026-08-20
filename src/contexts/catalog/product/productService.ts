@@ -1,4 +1,4 @@
-import { CreateProductRequest } from "./productDto";
+import { CreateProductRequest } from "./productType";
 import productEvents from "./productEvent";
 import Product from "./productModel";
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateOrderRequest } from "./orderDto";
+import { CreateOrderRequest } from "./orderType";
 import { createOrder, getAllOrders } from "./orderService";
 import { getCustomerById } from "../../customers/customer/customerService";
 import { getProductByIdsAndPrice } from "../../catalog/product/productService";

@@ -1,11 +1,23 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
+import customerRouter from "./contexts/customers/customer/customerRouter";
+import orderRouter from "./contexts/sales/order/orderRouter";
+import productRouter from "./contexts/catalog/product/productRouter";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
+
+app.use("/api/customers", customerRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/products", productRouter);
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,4 +39,10 @@ async function startServer() {
   } catch (error) {
     throw error;
   }
+}
+
+export { app };
+
+if (require.main === module) {
+  startServer();
 }

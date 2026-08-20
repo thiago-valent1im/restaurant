@@ -3,7 +3,7 @@ import productEvents from "./productEvent";
 import Product from "./productModel";
 
 export async function createProduct(data: CreateProductRequest) {
-  const product = new Product(data);
+  const product = await Product.create(data);
 
   productEvents.emit("product.created", product);
 
@@ -11,5 +11,29 @@ export async function createProduct(data: CreateProductRequest) {
 }
 
 export async function getAllProducts() {
-  return Product.find();
+  return await Product.find();
+}
+
+export async function getProductById(id: string) {
+  const product = await Product.findById(id);
+
+  if (!product) {
+    throw new Error("Product not found");
+  }
+
+  return product;
+}
+
+export async function getProductByIdsAndPrice(
+  products: { _id: string; price: number }[],
+) {
+  const result = await Product.find({
+    $or: products,
+  });
+
+  if (result.length !== products.length) {
+    throw new Error("Some products were not found or have an invalid price");
+  }
+
+  return products;
 }

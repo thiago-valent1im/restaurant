@@ -1,4 +1,4 @@
 export interface CreateCustomerRequest {
-  name: String;
-  email: String;
+  name: string;
+  email: string;
 }

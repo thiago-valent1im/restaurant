@@ -1,23 +1,24 @@
-import mongoose from "mongoose";
+import mongoose, { SchemaTypes } from "mongoose";
 const { Schema, model } = mongoose;
 
 const orderSchema = new Schema(
   {
     status: {
       type: String,
-      required: true,
       default: "pending",
     },
 
     customerId: {
-      type: String,
+      type: SchemaTypes.ObjectId,
+      ref: "Customer",
       required: true,
     },
 
     items: [
       {
         productId: {
-          type: String,
+          type: SchemaTypes.ObjectId,
+          ref: "Product",
           required: true,
         },
 
@@ -35,7 +36,6 @@ const orderSchema = new Schema(
 
         status: {
           type: String,
-          required: true,
           default: "pending",
         },
       },

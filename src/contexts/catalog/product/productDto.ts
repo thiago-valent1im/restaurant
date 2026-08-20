@@ -1,4 +1,4 @@
 export interface CreateProductRequest {
-  name: String;
-  price: Number;
+  name: string;
+  price: number;
 }

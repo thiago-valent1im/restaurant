@@ -1,7 +1,8 @@
 export interface CreateOrderRequest {
+  customerId: string;
   items: {
-    productId: String;
-    quantity: Number;
-    unitPrice: Number;
-  };
+    productId: string;
+    quantity: number;
+    unitPrice: number;
+  }[];
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateCustomerRequest } from "./customerDto";
-import { createCustomer } from "./customerService";
+import { createCustomer, getAllCustomers } from "./customerService";
 
 export async function create(req: Request, res: Response) {
   const data: CreateCustomerRequest = req.body;
@@ -12,4 +12,10 @@ export async function create(req: Request, res: Response) {
   } catch (error) {
     res.send(error);
   }
+}
+
+export async function getAll(req: Request, res: Response) {
+  const customers = await getAllCustomers();
+
+  res.send(customers);
 }

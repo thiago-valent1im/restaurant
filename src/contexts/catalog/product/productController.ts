@@ -16,6 +16,5 @@ export async function create(req: Request, res: Response) {
 
 export async function getAll(req: Request, res: Response) {
   const products = await getAllProducts();
-
   res.send(products);
 }

@@ -5,7 +5,7 @@ import {
   getAllCustomers,
   loginCustomer,
 } from "./customerService";
-import { LoginRequest } from "../../shared/middleware/authType";
+import { AuthRequest, LoginRequest } from "../../../shared/auth/authType";
 
 export async function login(req: Request, res: Response) {
   const data: LoginRequest = req.body;
@@ -30,6 +30,12 @@ export async function create(req: Request, res: Response) {
 }
 
 export async function getAll(req: Request, res: Response) {
+  const { role } = (req as AuthRequest).authorization;
+
+  if (role !== "admin") {
+    throw new Error("Not allowed!");
+  }
+
   const customers = await getAllCustomers();
 
   res.send(customers);

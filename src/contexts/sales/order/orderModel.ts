@@ -14,6 +14,37 @@ const orderSchema = new Schema(
       required: true,
     },
 
+    combos: [
+      {
+        comboId: {
+          type: SchemaTypes.ObjectId,
+          ref: "Combo",
+          required: true,
+        },
+
+        selections: [
+          {
+            sectionId: {
+              type: String,
+              required: true,
+            },
+
+            productId: {
+              type: SchemaTypes.ObjectId,
+              ref: "Product",
+              required: true,
+            },
+
+            price: {
+              type: Number,
+              required: true,
+              min: 0,
+            },
+          },
+        ],
+      },
+    ],
+
     items: [
       {
         productId: {

@@ -24,9 +24,7 @@ export async function getProductById(id: string) {
   return product;
 }
 
-export async function getProductByIdsAndPrice(
-  products: { _id: string; price: number }[],
-) {
+export async function hasProducts(products: { _id: string; price: number }[]) {
   const result = await Product.find({
     $or: products,
   });

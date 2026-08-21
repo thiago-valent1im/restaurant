@@ -12,6 +12,10 @@ const productSchema = new Schema(
       required: true,
       min: 0,
     },
+    status: {
+      type: String,
+      default: "active",
+    },
   },
   {
     timestamps: true,

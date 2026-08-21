@@ -1,16 +1,24 @@
 import { Request, Response } from "express";
 import { CreateOrderRequest } from "./orderType";
 import { createOrder, getAllOrders } from "./orderService";
-import { getCustomerById } from "../../customers/customer/customerService";
-import { getProductByIdsAndPrice } from "../../catalog/product/productService";
+import { hasCustomer } from "../../customers/customer/customerService";
+import { hasProducts } from "../../catalog/product/productService";
+import { AuthRequest } from "../../../shared/auth/authType";
+import { hasCombos } from "../combo/comboService";
 
 export async function create(req: Request, res: Response) {
+  const { _id } = (req as AuthRequest).authorization;
   const data: CreateOrderRequest = req.body;
 
-  await getCustomerById(data.customerId);
-  await getProductByIdsAndPrice(
+  if (_id != data.customerId) {
+    throw new Error("Not allowed!");
+  }
+
+  await hasCustomer(data.customerId);
+  await hasProducts(
     data.items.map((item) => ({ _id: item.productId, price: item.unitPrice })),
   );
+  await hasCombos(data.combos);
 
   try {
     const order = await createOrder(data);

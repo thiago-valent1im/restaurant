@@ -1,7 +1,7 @@
 import Customer from "./customerModel";
 import customerEvents from "./customerEvent";
 import { CreateCustomerRequest } from "./customerType";
-import { LoginRequest } from "../../shared/middleware/authType";
+import { LoginRequest } from "../../../shared/auth/authType";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -44,7 +44,7 @@ export async function getAllCustomers() {
   return await Customer.find();
 }
 
-export async function getCustomerById(id: string) {
+export async function hasCustomer(id: string) {
   const customer = await Customer.findById(id);
 
   if (!customer) {
